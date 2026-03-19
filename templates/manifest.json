@@ -1,0 +1,78 @@
+{
+  "skills": {
+    "teamind": {
+      "tier": "base",
+      "description": "Group chat memory \u2014 semantic search across Slack history"
+    },
+    "self-improving": {
+      "tier": "base",
+      "description": "Auto-learn from corrections, errors, and reflections"
+    },
+    "bottleneck-reporting": {
+      "tier": "base",
+      "description": "Detect and report blockers to controller"
+    },
+    "approval-flow": {
+      "tier": "base",
+      "description": "Generic approval workflow framework \u2014 send proposals, parse approvals, callback execution"
+    },
+    "browser-cdp": {
+      "tier": "base",
+      "description": "Chrome browser control via CDP \u2014 reuse noVNC login sessions for authenticated web access"
+    },
+    "ccp": {
+      "tier": "base",
+      "description": "Claude Code proxy \u2014 transparent relay between user and Claude Code via -p + --resume"
+    },
+    "deep-research": {
+      "tier": "base",
+      "description": "Multi-model deep research with parallel search, cross-validation, and cited reports"
+    },
+    "excalidraw-diagram-generator": {
+      "tier": "base",
+      "description": "Generate Excalidraw diagrams from natural language descriptions"
+    },
+    "github-cli": {
+      "tier": "standard",
+      "description": "GitHub CLI (gh) reference \u2014 repos, issues, PRs, Actions, releases, search, projects v2"
+    },
+    "goal-participant": {
+      "tier": "base",
+      "description": "GoalOps participant protocol \u2014 receive sub-goals, execute, report, cross-lobster coordination"
+    },
+    "google-workspace": {
+      "tier": "base",
+      "description": "Access Google Docs, Sheets, Drive, Calendar, Gmail via OAuth"
+    },
+    "non-blocking-wait": {
+      "tier": "base",
+      "description": "Non-blocking wait pattern \u2014 use subagents or cron instead of sleep/poll loops"
+    },
+    "quick-data-dashboard": {
+      "tier": "base",
+      "description": "Pure CSS data dashboard generator \u2014 HTML template to PNG via headless Chrome"
+    },
+    "skill-contribution": {
+      "tier": "base",
+      "description": "Submit personal skills to the company shared library with pre-checks and approval"
+    },
+    "slack-canvas": {
+      "tier": "base",
+      "description": "Read and write Slack Canvas content via API"
+    },
+    "structured-decision-alignment": {
+      "tier": "base",
+      "description": "Guide cross-team multi-person decision alignment with structured discussion flow"
+    },
+    "task-management": {
+      "tier": "base",
+      "description": "Unified task management \u2014 sprint planning, breakdown, board CRUD, proactive scanning, TODO extraction. Backend-agnostic (Notion, Linear, GitHub Projects, or markdown)"
+    }
+  },
+  "tiers": {
+    "base": "All lobsters",
+    "standard": "Standard lobsters (excludes lite/trial)",
+    "restricted": "Allowlisted lobsters only",
+    "admin": "Controller only"
+  }
+}

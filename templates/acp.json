@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "backend": "acpx",
+  "defaultAgent": "claude",
+  "allowedAgents": ["claude", "codex", "pi", "opencode", "gemini", "kimi"],
+  "maxConcurrentSessions": 8
+}

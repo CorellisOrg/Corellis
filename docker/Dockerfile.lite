@@ -1,0 +1,84 @@
+FROM node:22-slim
+
+# ============================================================
+# Lobster Farm — Lite Image
+# For most teams. Includes: OpenClaw, Chrome, VNC, Claude Code.
+# Does NOT include: Go toolchain, protoc, kratos, libvips.
+# ============================================================
+
+# Core system deps + Chrome deps + VNC + basic tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl git ca-certificates gosu default-mysql-client \
+    # VNC + desktop
+    tigervnc-standalone-server tigervnc-common tigervnc-tools \
+    xfce4 xfce4-terminal dbus-x11 xfonts-base \
+    # noVNC deps
+    python3 python3-numpy \
+    # Chrome deps (fonts, etc)
+    fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libcups2 \
+    libdrm2 libgbm1 libnss3 libxcomposite1 libxdamage1 \
+    libxrandr2 xdg-utils libxss1 libasound2 \
+    wget procps sudo \
+    # Essential tools
+    jq python3-pip python3-venv zip unzip ffmpeg rsync \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Chrome
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb \
+    && apt-get update && apt-get install -y /tmp/chrome.deb \
+    && rm /tmp/chrome.deb && rm -rf /var/lib/apt/lists/*
+
+# Install GitHub CLI
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+    | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+    > /etc/apt/sources.list.d/github-cli.list \
+    && apt-get update && apt-get install -y gh \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install AWS CLI via pip
+RUN pip3 install --no-cache-dir --break-system-packages awscli
+
+# Install noVNC
+RUN git clone --depth 1 https://github.com/novnc/noVNC.git /opt/noVNC \
+    && git clone --depth 1 https://github.com/novnc/websockify.git /opt/noVNC/utils/websockify
+
+# Install OpenClaw + Claude Code + mcporter globally
+RUN npm install -g openclaw@latest @anthropic-ai/claude-code mcporter
+
+# Install acpx plugin and its npm dependencies
+RUN openclaw plugins install @openclaw/acpx || true
+RUN cd /usr/local/lib/node_modules/openclaw/extensions/acpx \
+    && npm install --production \
+    && ls -la node_modules/.bin/acpx
+
+# Install Playwright browsers for screenshots
+RUN npx -y playwright install chromium && npx -y playwright install-deps chromium 2>/dev/null || true
+
+# Apply OpenClaw patches (run patch-all.sh after build if needed)
+COPY scripts/patch-implicit-mention.sh /tmp/patch-implicit-mention.sh
+RUN bash /tmp/patch-implicit-mention.sh && rm /tmp/patch-implicit-mention.sh
+
+# Create lobster user (non-root) with minimal sudo for acpx
+RUN useradd -m -s /bin/bash lobster \
+    && echo "lobster ALL=(root) NOPASSWD: /usr/bin/chown" >> /etc/sudoers.d/lobster-acpx
+
+# Fix acpx extensions dir ownership
+RUN chown -R 1001:1001 /usr/local/lib/node_modules/openclaw/extensions/acpx/node_modules/
+
+# Create mount points
+RUN mkdir -p /shared/company && chown lobster:lobster /shared/company
+
+# VNC setup for lobster user
+RUN mkdir -p /home/lobster/.vnc && chown lobster:lobster /home/lobster/.vnc
+
+WORKDIR /home/lobster
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# OpenClaw gateway + noVNC
+EXPOSE 18789 6080
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["openclaw", "gateway", "run"]

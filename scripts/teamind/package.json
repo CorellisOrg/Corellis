@@ -1,0 +1,17 @@
+{
+  "name": "lobster-teamind",
+  "version": "1.0.0",
+  "description": "Local group chat memory indexing and search for Lobster Farm",
+  "main": "indexer.js",
+  "scripts": {
+    "index": "node indexer.js",
+    "search": "node search.js",
+    "digest": "node digest.js",
+    "setup": "node setup.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "license": "MIT"
+}

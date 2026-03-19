@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0c0c0c;color:#f0f0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:24px;max-width:1100px;margin:0 auto}
+h1{font-size:28px;font-weight:800;letter-spacing:-0.5px}
+.sub{color:#777;font-size:13px;margin:4px 0 20px}
+.kpi-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kpi{background:#161618;border:1px solid #2a2a2e;border-radius:10px;padding:14px 18px;text-align:center;flex:1;min-width:130px}
+.kpi .v{font-size:32px;font-weight:800;display:block}
+.kpi .l{font-size:11px;color:#777;margin-top:4px}
+.blue{color:#3b82f6}.green{color:#22c55e}.orange{color:#f59e0b}
+.card{background:#161618;border:1px solid #2a2a2e;border-radius:10px;padding:18px;margin-bottom:20px}
+.card h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.bar-row{display:flex;align-items:center;margin-bottom:6px;font-size:13px}
+.bar-row .name{width:100px;text-align:right;padding-right:10px;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.bar-row .bar-wrap{flex:1;height:22px;background:#1a1a1e;border-radius:3px}
+.bar-row .bar{height:100%;border-radius:3px;min-width:1px}
+.bar-row .val{width:70px;text-align:right;font-weight:700;color:#22c55e;padding-left:8px;flex-shrink:0;font-size:12px}
+.hi{background:linear-gradient(90deg,#3b82f6,#8b5cf6)}
+.lo{background:#334155}
+.dist{display:flex;gap:10px;margin-bottom:14px}
+.dist-item{flex:1;text-align:center;background:#111114;border-radius:8px;padding:12px 8px}
+.dist-item .n{font-size:28px;font-weight:800}
+.dist-item .r{font-size:11px;color:#777;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 10px;border-bottom:2px solid #2a2a2e;color:#777;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:7px 10px;border-bottom:1px solid #1a1a1e}
+.rk{color:#555;font-weight:700;width:28px}
+.money{font-weight:700;color:#22c55e;text-align:right;white-space:nowrap}
+.pct{color:#777;text-align:right}
+.bw{width:120px}
+.tb{height:14px;border-radius:2px;background:linear-gradient(90deg,#3b82f6,#8b5cf6)}
+.bots{color:#999;font-size:11px}
+.bt{display:inline-block;background:#1a1a1e;border-radius:3px;padding:1px 6px;margin:1px}
+.bt b{color:#3b82f6}
+</style></head>
+<body>
+
+<!-- ===== TITLE ===== -->
+<h1>🦞 [Report Title]</h1>
+<div class="sub">[Time Range] · [Parameter 1] · [Parameter 2]</div>
+
+<!-- ===== KPI ROW ===== -->
+<div class="kpi-row">
+  <div class="kpi"><span class="v blue">$250K</span><span class="l">Label 1</span></div>
+  <div class="kpi"><span class="v green">158</span><span class="l">Label 2</span></div>
+  <div class="kpi"><span class="v">1,260</span><span class="l">Label 3</span></div>
+  <div class="kpi"><span class="v orange">36.0%</span><span class="l">Label 4</span></div>
+</div>
+
+<!-- ===== GRID: CHART + SIDEBAR ===== -->
+<div class="grid2">
+  <div class="card">
+    <h3>[Insight-driven title, such as "Top 8 earn 72%"]</h3>
+    <!-- Repeat bar-row for each item -->
+    <div class="bar-row">
+      <span class="name">Item 1</span>
+      <div class="bar-wrap"><div class="bar hi" style="width:100%"></div></div>
+      <span class="val">$40,000</span>
+    </div>
+    <div class="bar-row">
+      <span class="name">Item 2</span>
+      <div class="bar-wrap"><div class="bar hi" style="width:85%"></div></div>
+      <span class="val">$34,000</span>
+    </div>
+    <div class="bar-row">
+      <span class="name">Item 3</span>
+      <div class="bar-wrap"><div class="bar lo" style="width:44%"></div></div>
+      <span class="val">$17,500</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>[Distribution Insight Title]</h3>
+    <div class="dist">
+      <div class="dist-item"><div class="n orange">8</div><div class="r">≥ $10K</div></div>
+      <div class="dist-item"><div class="n green">15</div><div class="r">$1K–$10K</div></div>
+      <div class="dist-item"><div class="n blue">18</div><div class="r">$100–$1K</div></div>
+      <div class="dist-item"><div class="n" style="color:#555">117</div><div class="r">&lt; $100</div></div>
+    </div>
+    <!-- Stacked bar for proportions -->
+    <h3 style="margin-top:20px">Proportion Distribution</h3>
+    <div style="display:flex;height:28px;border-radius:6px;overflow:hidden;margin:10px 0">
+      <div style="width:66.7%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">Category A 67%</div>
+      <div style="width:33.3%;background:#8b5cf6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">Category B 33%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DETAIL TABLE ===== -->
+<div class="card">
+  <h3>[Detailed Table Title]</h3>
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th style="text-align:right">Value</th><th style="text-align:right">%</th><th>Share</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="rk">1</td>
+        <td><b>Item 1</b></td>
+        <td class="money">$40,000</td>
+        <td class="pct">16.0%</td>
+        <td class="bw"><div class="tb" style="width:100%"></div></td>
+        <td class="bots"><span class="bt">Sub-A <b>50%</b></span><span class="bt">Sub-B <b>25%</b></span></td>
+      </tr>
+      <!-- More rows... -->
+    </tbody>
+  </table>
+</div>
+
+</body></html>
