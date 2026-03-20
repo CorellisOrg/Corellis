@@ -82,6 +82,9 @@ Includes ready-to-use skills: deep research, structured decision alignment, Exca
 
 ## Architecture
 
+<details>
+<summary>Controller on host + lobsters in Docker containers (click to expand)</summary>
+
 The **controller** runs directly on the host (not in Docker). It needs host access to manage Docker containers and write to shared directories. Each **lobster** runs in an isolated Docker container with read-only access to shared knowledge.
 
 ```
@@ -111,7 +114,12 @@ The **controller** runs directly on the host (not in Docker). It needs host acce
 
 **Why not Docker for the controller?** The controller needs to run `docker compose`, manage host files, and execute fleet scripts. Putting it in Docker would require Docker-in-Docker or socket mounting — added complexity with no benefit. Most users already have OpenClaw on their machine; Lobster Farm extends it.
 
+</details>
+
 ## Directory Structure
+
+<details>
+<summary>Full project tree (click to expand)</summary>
 
 ```
 corellis/
@@ -178,7 +186,12 @@ corellis/
 └── docker-compose.yml         # Auto-managed by spawn script
 ```
 
+</details>
+
 ## Scripts
+
+<details>
+<summary>24 operational scripts — spawning, fleet sync, health checks, upgrades (click to expand)</summary>
 
 ### Core Operations
 | Script | Description |
@@ -211,7 +224,12 @@ corellis/
 | `patch-implicit-mention.sh` | Thread messages trigger AI even without @mention → adds env var control |
 | `patch-cc-session.sh` | `mode="session"` requires `thread=true` on Slack → removes restriction |
 
+</details>
+
 ## Secrets Management
+
+<details>
+<summary>Two-file credential system with SecretRef (click to expand)</summary>
 
 Each lobster gets two secret files:
 
@@ -220,7 +238,12 @@ Each lobster gets two secret files:
 
 OpenClaw's SecretRef system (`{"$ref": "secrets://KEY"}`) keeps secrets out of `openclaw.json`.
 
+</details>
+
 ## 🏛️ Governance — Company Rules & Knowledge
+
+<details>
+<summary>Fleet-wide rules, knowledge templates, and governance framework (click to expand)</summary>
 
 Lobster Farm includes a complete governance framework so your fleet operates as a coherent organization, not just N separate assistants.
 
@@ -241,7 +264,12 @@ Lobster Farm includes a complete governance framework so your fleet operates as 
 
 **Knowledge base templates** in `templates/company-memory/` provide a structure for organizing your company's shared knowledge (guides, data sources, glossary, etc.).
 
+</details>
+
 ## 🎯 GoalOps — Distributed Goal Coordination
+
+<details>
+<summary>Turn goals into coordinated multi-lobster execution (click to expand)</summary>
 
 GoalOps turns your fleet from a collection of assistants into a coordinated team that can execute complex, multi-step goals.
 
@@ -259,7 +287,12 @@ GoalOps turns your fleet from a collection of assistants into a coordinated team
 
 See the [GoalOps section in AGENTS.md](templates/company-config/AGENTS.md) for the full protocol.
 
+</details>
+
 ## 🧠 Teamind — Collective Team Memory
+
+<details>
+<summary>Semantic search across all Slack conversations + daily digests (click to expand)</summary>
 
 Give your AI team a shared memory of every Slack conversation. Teamind indexes channel history with embeddings and generates thread summaries, so any lobster can search "what was decided about X" and get accurate, sourced answers.
 
@@ -287,7 +320,12 @@ node search.js "API design decision" --type decision --after 2026-03-01 --json
 
 See [templates/teamind/SKILL.md](templates/teamind/SKILL.md) for full documentation.
 
+</details>
+
 ## 🧬 Self-Improving (2nd Me)
+
+<details>
+<summary>Auto-learn from corrections, promote lessons fleet-wide (click to expand)</summary>
 
 Lobsters automatically learn from their mistakes. When corrected, they record the lesson in `.learnings/` and periodically promote validated patterns to permanent memory.
 
@@ -304,6 +342,8 @@ Lobsters automatically learn from their mistakes. When corrected, they record th
 ```
 
 See [templates/self-improving/SKILL.md](templates/self-improving/SKILL.md) for full documentation.
+
+</details>
 
 ## Requirements
 
