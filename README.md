@@ -1,5 +1,12 @@
 # 🦞 Lobster Farm
 
+[![Stars](https://img.shields.io/github/stars/CorellisOrg/corellis?style=social)](https://github.com/CorellisOrg/corellis)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/CorellisOrg/corellis)](https://github.com/CorellisOrg/corellis/commits/main)
+[![OpenClaw](https://img.shields.io/badge/Built%20on-OpenClaw-blue)](https://openclaw.ai)
+
+> **21 AI agents. One server. They coordinate, learn, and get work done — without you in the loop.**
+
 **Scale your [OpenClaw](https://openclaw.ai) from one AI assistant to a fleet — one per team member, with shared knowledge and collective memory.**
 
 [OpenClaw](https://openclaw.ai) is an open-source personal AI assistant. Lobster Farm lets you give that same experience to your entire team: each person gets their own isolated "lobster" in a Docker container, with private memory and conversations, while sharing company knowledge, skills, and a searchable team memory across the fleet.
