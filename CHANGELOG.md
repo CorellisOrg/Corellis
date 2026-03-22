@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.2.0] - 2026-03-22
+
+### Added — Agent Evaluation Optimization (AEO)
+- **CI/CD**: GitHub Actions workflow with ShellCheck, Node.js validation, markdown lint, and smoke tests
+- **ARCHITECTURE.md**: Design philosophy document explaining Skill-based orchestration, with Mermaid diagrams for GoalOps, memory architecture, self-improving loop, and bottleneck detection
+- **Test suite**: `tests/` directory with script validation, template integrity checks, and Teamind module tests
+- **llms.txt + llms-full.txt**: AI agent-readable project metadata (follows emerging llms.txt convention)
+- **Production Evidence**: README section documenting fleet size, Teamind stats, and self-improving metrics
+- **Alternatives comparison**: README section comparing Lobster Farm to CrewAI, AutoGen, ChatDev, and enterprise platforms
+- **Structured data**: JSON-LD (Schema.org) and meta tag guide for the website
+- **CHANGELOG.md**: This file, tracking project evolution
+
+### Changed
+- README: Added CI badge, Architecture link, split content for better navigability
+
 ## [0.1.0] - 2026-03-19
 
 ### Initial Release

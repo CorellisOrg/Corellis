@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lobster Farm",
+  "alternateName": "Corellis",
+  "description": "AI Workforce OS for OpenClaw — scale one AI assistant into a coordinated fleet with shared knowledge and collective memory.",
+  "url": "https://corellis.ai",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux",
+  "softwareRequirements": "OpenClaw, Docker, Node.js",
+  "license": "https://opensource.org/licenses/MIT",
+  "codeRepository": "https://github.com/CorellisOrg/corellis",
+  "programmingLanguage": ["Shell", "JavaScript"],
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Fleet management for 21+ AI agents on a single server",
+    "4-layer memory isolation (private, member, channel, company)",
+    "Teamind: semantic search across all Slack conversations",
+    "Self-improving: auto-learn from corrections, promote fleet-wide",
+    "GoalOps: distributed goal decomposition and P2P coordination",
+    "17 built-in skills with permission tiers",
+    "24 operational scripts: spawn, upgrade, backup, monitor",
+    "Bottleneck detection and proactive reporting",
+    "Rolling upgrades with canary testing and auto-rollback"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "Corellis",
+    "url": "https://corellis.ai"
+  },
+  "datePublished": "2026-03-19",
+  "softwareVersion": "0.1.0"
+}

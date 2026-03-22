@@ -400,8 +400,6 @@ cp $LOBSTER_FARM_DIR/templates/shared-knowledge/shared-knowledge.md $LOBSTER_FAR
 - `company-memory/` (read-only) — stable curated knowledge, controller promotes verified entries
 
 This creates a **learning loop**: lobsters discover → share → controller curates → all lobsters benefit.
-
-
 ## Notes
 
 - If docker requires group permissions, you may need to add your user to the `docker` group: `sudo usermod -aG docker $USER`

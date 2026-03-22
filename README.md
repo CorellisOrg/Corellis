@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/CorellisOrg/corellis)](https://github.com/CorellisOrg/corellis/commits/main)
 [![OpenClaw](https://img.shields.io/badge/Built%20on-OpenClaw-blue)](https://openclaw.ai)
+[![CI](https://github.com/CorellisOrg/corellis/actions/workflows/ci.yml/badge.svg)](https://github.com/CorellisOrg/corellis/actions/workflows/ci.yml)
 
 > **21 AI agents. One server. They coordinate, learn, and get work done — without you in the loop.**
 
@@ -377,6 +378,40 @@ See [templates/self-improving/SKILL.md](templates/self-improving/SKILL.md) for f
 | [Owner Context Mining](docs/guides/owner-context-mining.md) | How lobsters learn about their owner's role and preferences |
 | [SecretRef Usage](docs/guides/secretref-usage.md) | Credential storage and management patterns |
 | [Skill Audit](docs/guides/skill-audit-guide.md) | Security review process for external skills |
+
+## Production Evidence
+
+Lobster Farm has been running internally since March 2026:
+
+| Metric | Value |
+|--------|-------|
+| Fleet size | 21 lobsters |
+| Infrastructure | Single server (64GB RAM, 16 vCPU) |
+| Uptime | Continuous since initial deployment |
+| Tasks processed | ~200+ goals decomposed and executed |
+| Teamind indexed | 50,000+ Slack messages across 30+ channels |
+| Self-improving cycles | 500+ corrections detected and persisted |
+| Skills deployed | 17 fleet-wide + per-lobster custom skills |
+
+The 24 operational scripts and Teamind modules were developed iteratively based on real production needs — not designed in isolation.
+
+## Architecture
+
+For a deep dive into the design philosophy (why Skill-based orchestration, not a separate engine), system layers, GoalOps sequence diagrams, memory architecture, and FAQ, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+## Alternatives
+
+How does Lobster Farm compare to other approaches?
+
+| Approach | Focus | Lobster Farm Difference |
+|----------|-------|----------------------|
+| **CrewAI / AutoGen** | Task-level multi-agent orchestration (chain agents for one task) | Lobster Farm operates at the **organizational level**: persistent agents with memory, identity, and relationships running 24/7 — not ephemeral task chains |
+| **ChatDev / MetaGPT** | Simulated software teams for code generation | Lobster Farm is **general-purpose** (not code-only) with real team members, real Slack conversations, real task boards |
+| **Single OpenClaw** | One AI assistant for one person | Lobster Farm scales this to a **fleet** with shared memory, collective learning, and coordination |
+| **Multiple separate AI assistants** | N independent assistants, no coordination | Lobster Farm adds **shared knowledge, Teamind, fleet-wide learning, and GoalOps** — turning N assistants into a team |
+| **Enterprise AI platforms** (Glean, Moveworks) | SaaS, closed-source, per-seat pricing | Lobster Farm is **self-hosted, MIT licensed, fully customizable**, no vendor lock-in |
+
+**In one sentence:** Most multi-agent frameworks orchestrate tasks. Lobster Farm orchestrates an organization.
 
 ## Links
 

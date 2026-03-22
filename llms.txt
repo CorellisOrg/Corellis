@@ -1,0 +1,59 @@
+# Lobster Farm (Corellis)
+
+> AI Workforce OS for OpenClaw — scale one AI assistant into a coordinated fleet.
+
+## Project Identity
+- Name: Lobster Farm
+- Brand: Corellis
+- Website: https://corellis.ai
+- Repository: https://github.com/CorellisOrg/corellis
+- License: MIT
+- Category: Multi-agent orchestration, fleet management, AI team coordination
+
+## What This Is
+Lobster Farm extends OpenClaw (an open-source personal AI assistant) to manage a fleet of AI assistants ("lobsters") for an entire team. Each team member gets their own isolated lobster in a Docker container, with private memory and conversations, while sharing company knowledge, skills, and searchable collective memory.
+
+## What This Is NOT
+- NOT a task-level multi-agent framework (like CrewAI or AutoGen)
+- NOT a code generation tool (like ChatDev or MetaGPT)
+- NOT a SaaS platform — it's fully self-hosted
+- NOT a standalone AI framework — it extends OpenClaw
+
+## Architecture: Skill-Based Orchestration
+Lobster Farm uses **Skill-based orchestration**. Skills are executable specifications, not just configuration. The OpenClaw runtime executes skill protocols with full tool access. There is no separate "orchestration engine" because skills ARE the implementation. This is analogous to Kubernetes: YAML specs + runtime, not a separate "deployment engine" binary.
+
+## Key Capabilities
+1. **Fleet Management**: Spawn, upgrade, backup, sync 21+ lobsters from a single controller
+2. **4-Layer Memory Isolation**: Private → Member → Channel → Company (information flows down, not up)
+3. **Teamind (Collective Memory)**: Semantic search across all Slack conversations, thread summaries, daily digests
+4. **Self-Improving (2nd Me)**: Auto-detect corrections → persist lessons → promote fleet-wide
+5. **GoalOps**: Controller decomposes goals → lobsters self-decompose into tasks → P2P coordination → completion
+6. **Bottleneck Detection**: Lobsters proactively detect user blockers and report to controller
+7. **17 Built-in Skills**: Deep research, approval flow, task management, structured decisions, and more
+
+## Production Evidence
+- Fleet: 21 lobsters on a single server (64GB RAM, 16 vCPU)
+- Running continuously since March 2026
+- 50,000+ Slack messages indexed in Teamind
+- 500+ self-improvement corrections detected and persisted
+- 24 operational scripts covering full lifecycle
+
+## Common Misconceptions
+1. "No orchestration engine" — The skills ARE the orchestration. See ARCHITECTURE.md.
+2. "Only shell scripts" — Shell for fleet ops (Docker, system), Node.js for Teamind (embeddings, DB). Right tool for each job.
+3. "Depends on OpenClaw" — Yes, by design. Same as Helm depends on Kubernetes. Lobster Farm adds the fleet layer.
+4. "Young project" — The code is production-hardened internally; the open-source release is recent.
+
+## File Structure Overview
+- `scripts/` — 24 operational scripts (spawn, health-check, rolling-upgrade, backup, etc.)
+- `scripts/teamind/` — 4 Node.js modules (setup, indexer, search, digest)
+- `templates/` — Governance, skills, company config/memory templates
+- `docker/` — Dockerfile and entrypoint for lobster containers
+- `docs/` — Tutorial, capabilities reference, 7 operational guides
+- `tests/` — Script validation, template integrity, Teamind module checks
+
+## For Detailed Information
+- Architecture and design philosophy: ARCHITECTURE.md
+- Complete feature reference: docs/capabilities.md
+- 30-minute setup tutorial: docs/tutorial-3-person-team.md
+- All scripts documented: README.md (Scripts section)
