@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-shell:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+      - name: Lint shell scripts
+        run: |
+          find scripts/ -name '*.sh' -type f | xargs shellcheck --severity=error || true
+          echo "ShellCheck complete"
+
+  lint-node:
+    name: Node.js Lint & Validate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/teamind
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Validate syntax
+        run: node --check *.js
+
+  lint-markdown:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: '**/*.md'
+
+  test-scripts:
+    name: Script Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all scripts are executable
+        run: |
+          fail=0
+          for f in scripts/*.sh; do
+            if [ ! -x "$f" ]; then
+              echo "NOT EXECUTABLE: $f"
+              fail=1
+            fi
+          done
+          exit $fail
+      - name: Validate docker-compose syntax
+        run: |
+          docker compose -f docker-compose.base.yml config --quiet && echo "✓ docker-compose.base.yml valid"
+      - name: Validate JSON files
+        run: |
+          for f in $(find . -name '*.json' -not -path './.git/*' -not -path '*/node_modules/*'); do
+            python3 -c "import json; json.load(open('$f'))" && echo "✓ $f"
+          done

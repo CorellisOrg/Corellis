@@ -95,7 +95,7 @@ Analyze the user's description to determine:
 - Attributes with visibility (+, -, #)
 - Methods with visibility and parameters
 - Relationships: inheritance (solid line + white triangle), implementation (dashed line + white triangle), association (solid line), dependency (dashed line), aggregation (solid line + white diamond), composition (solid line + filled diamond)
-- Multiplicity notations (1, 0..1, 1..*, *)
+- Multiplicity notations (1, 0..1, 1..\*, \*)
 
 **For Sequence Diagrams:**
 - Objects/actors (arranged horizontally at top)
@@ -160,9 +160,9 @@ Structure the complete Excalidraw file:
 
 1. Save as `<descriptive-name>.excalidraw`
 2. Inform user how to open:
-   - Visit https://excalidraw.com
-   - Click "Open" or drag-and-drop the file
-   - Or use Excalidraw VS Code extension
+  - Visit https://excalidraw.com
+  - Click "Open" or drag-and-drop the file
+  - Or use Excalidraw VS Code extension
 
 ## Best Practices
 
@@ -178,14 +178,14 @@ Structure the complete Excalidraw file:
 ### Layout Tips
 
 1. **Start positions**: Center important elements, use consistent spacing
-2. **Spacing**: 
-   - Horizontal gap: 200-300px between elements
-   - Vertical gap: 100-150px between rows
+2. **Spacing**:
+  - Horizontal gap: 200-300px between elements
+  - Vertical gap: 100-150px between rows
 3. **Colors**: Use consistent color scheme
-   - Primary elements: Light blue (`#a5d8ff`)
-   - Secondary elements: Light green (`#b2f2bb`)
-   - Important/Central: Yellow (`#ffd43b`)
-   - Alerts/Warnings: Light red (`#ffc9c9`)
+  - Primary elements: Light blue (`#a5d8ff`)
+  - Secondary elements: Light green (`#b2f2bb`)
+  - Important/Central: Yellow (`#ffd43b`)
+  - Alerts/Warnings: Light red (`#ffc9c9`)
 4. **Text sizing**: 16-24px for readability
 5. **Font**: Always use `fontFamily: 5` (Excalifont) for all text elements
 6. **Arrow style**: Use straight arrows for simple flows, curved for complex relationships
@@ -315,18 +315,18 @@ For specialized diagrams (e.g., AWS/GCP/Azure architecture diagrams), you can us
 
    ```
    To use [AWS/GCP/Azure/etc.] architecture icons, please follow these steps:
-   
+
    1. Visit https://libraries.excalidraw.com/
    2. Search for "[AWS Architecture Icons/etc.]" and download the .excalidrawlib file
    3. Create directory: skills/excalidraw-diagram-generator/libraries/[icon-set-name]/
    4. Place the downloaded file in that directory
    5. Run the splitter script:
       python skills/excalidraw-diagram-generator/scripts/split-excalidraw-library.py skills/excalidraw-diagram-generator/libraries/[icon-set-name]/
-   
+
    This will split the library into individual icon files for efficient use.
    After setup is complete, I can create your diagram using the actual AWS/cloud icons.
-   
-   Alternatively, I can create the diagram now using simple shapes (rectangles, ellipses) 
+
+   Alternatively, I can create the diagram now using simple shapes (rectangles, ellipses)
    which you can later replace with icons manually in Excalidraw.
    ```
 
@@ -342,9 +342,9 @@ mkdir -p skills/excalidraw-diagram-generator/libraries/aws-architecture-icons
 - Search for your desired icon set (e.g., "AWS Architecture Icons")
 - Click download to get the `.excalidrawlib` file
 - Example categories (availability varies; confirm on the site):
-   - Cloud service icons
-   - UI/Material icons
-   - Flowchart symbols
+  - Cloud service icons
+  - UI/Material icons
+  - Flowchart symbols
 
 **Step 3: Place Library File**
 - Rename the downloaded file to match the directory name (e.g., `aws-architecture-icons.excalidrawlib`)
@@ -380,24 +380,24 @@ skills/excalidraw-diagram-generator/libraries/aws-architecture-icons/
 The repository includes Python scripts that handle icon integration automatically:
 
 1. **Create base diagram structure**:
-   - Create `.excalidraw` file with basic layout (title, boxes, regions)
-   - This establishes the canvas and overall structure
+  - Create `.excalidraw` file with basic layout (title, boxes, regions)
+  - This establishes the canvas and overall structure
 
 2. **Add icons using Python script**:
    ```bash
    python skills/excalidraw-diagram-generator/scripts/add-icon-to-diagram.py \
      <diagram-path> <icon-name> <x> <y> [--label "Text"] [--library-path PATH]
    ```
-   - Edit via `.excalidraw.edit` is enabled by default to avoid overwrite issues; pass `--no-use-edit-suffix` to disable.
-   
+  - Edit via `.excalidraw.edit` is enabled by default to avoid overwrite issues; pass `--no-use-edit-suffix` to disable.
+
    **Examples**:
    ```bash
    # Add EC2 icon at position (400, 300) with label
    python scripts/add-icon-to-diagram.py diagram.excalidraw EC2 400 300 --label "Web Server"
-   
+
    # Add VPC icon at position (200, 150)
    python scripts/add-icon-to-diagram.py diagram.excalidraw VPC 200 150
-   
+
    # Add icon from different library
    python scripts/add-icon-to-diagram.py diagram.excalidraw Compute-Engine 500 200 \
      --library-path libraries/gcp-icons --label "API Server"
@@ -408,16 +408,16 @@ The repository includes Python scripts that handle icon integration automaticall
    python skills/excalidraw-diagram-generator/scripts/add-arrow.py \
      <diagram-path> <from-x> <from-y> <to-x> <to-y> [--label "Text"] [--style solid|dashed|dotted] [--color HEX]
    ```
-   - Edit via `.excalidraw.edit` is enabled by default to avoid overwrite issues; pass `--no-use-edit-suffix` to disable.
-   
+  - Edit via `.excalidraw.edit` is enabled by default to avoid overwrite issues; pass `--no-use-edit-suffix` to disable.
+
    **Examples**:
    ```bash
    # Simple arrow from (300, 250) to (500, 300)
    python scripts/add-arrow.py diagram.excalidraw 300 250 500 300
-   
+
    # Arrow with label
    python scripts/add-arrow.py diagram.excalidraw 300 250 500 300 --label "HTTPS"
-   
+
    # Dashed arrow with custom color
    python scripts/add-arrow.py diagram.excalidraw 400 350 600 400 --style dashed --color "#7950f2"
    ```
@@ -426,14 +426,14 @@ The repository includes Python scripts that handle icon integration automaticall
    ```bash
    # Step 1: Create base diagram with title and structure
    # (Create .excalidraw file with initial elements)
-   
+
    # Step 2: Add icons with labels
    python scripts/add-icon-to-diagram.py my-diagram.excalidraw "Internet-gateway" 200 150 --label "Internet Gateway"
    python scripts/add-icon-to-diagram.py my-diagram.excalidraw VPC 250 250
    python scripts/add-icon-to-diagram.py my-diagram.excalidraw ELB 350 300 --label "Load Balancer"
    python scripts/add-icon-to-diagram.py my-diagram.excalidraw EC2 450 350 --label "EC2 Instance"
    python scripts/add-icon-to-diagram.py my-diagram.excalidraw RDS 550 400 --label "Database"
-   
+
    # Step 3: Add connecting arrows
    python scripts/add-arrow.py my-diagram.excalidraw 250 200 300 250  # Internet → VPC
    python scripts/add-arrow.py my-diagram.excalidraw 300 300 400 300  # VPC → ELB
@@ -453,7 +453,7 @@ The repository includes Python scripts that handle icon integration automaticall
 
 Only use this if Python scripts are unavailable:
 
-1. **Check for libraries**: 
+1. **Check for libraries**:
    ```
    List directory: skills/excalidraw-diagram-generator/libraries/
    Look for subdirectories containing reference.md files
@@ -474,9 +474,9 @@ Only use this if Python scripts are unavailable:
 4. **Load specific icon data** (WARNING: Large files):
    ```
    Read ONLY the needed icon files:
-   - libraries/aws-architecture-icons/icons/EC2.json (200-300 lines)
-   - libraries/aws-architecture-icons/icons/S3.json (200-300 lines)
-   - libraries/aws-architecture-icons/icons/Lambda.json (200-300 lines)
+  - libraries/aws-architecture-icons/icons/EC2.json (200-300 lines)
+  - libraries/aws-architecture-icons/icons/S3.json (200-300 lines)
+  - libraries/aws-architecture-icons/icons/Lambda.json (200-300 lines)
    Note: Each icon file is 200-1000 lines - this consumes significant tokens
    ```
 
@@ -546,11 +546,11 @@ python scripts/add-arrow.py my-aws-diagram.excalidraw 565 330 650 350 --label "S
 1. Check: `libraries/aws-architecture-icons/reference.md` exists → Yes
 2. Read reference.md → Find entries for Internet-gateway, VPC, ELB, EC2, RDS
 3. Load:
-   - `icons/Internet-gateway.json` (298 lines)
-   - `icons/VPC.json` (550 lines)
-   - `icons/ELB.json` (363 lines)
-   - `icons/EC2.json` (231 lines) 
-   - `icons/RDS.json` (similar size)
+  - `icons/Internet-gateway.json` (298 lines)
+  - `icons/VPC.json` (550 lines)
+  - `icons/ELB.json` (363 lines)
+  - `icons/EC2.json` (231 lines)
+  - `icons/RDS.json` (similar size)
    **Total: ~2000+ lines of JSON to process**
 4. Extract elements from each JSON
 5. Calculate bounding boxes and offsets for each icon
@@ -569,11 +569,11 @@ python scripts/add-arrow.py my-aws-diagram.excalidraw 565 330 650 350 --label "S
 
 - This workflow works with any valid `.excalidrawlib` file you provide.
 - Examples of library categories you may find on https://libraries.excalidraw.com/:
-   - Cloud service icons
-   - Kubernetes / infrastructure icons
-   - UI / Material icons
-   - Flowchart / diagram symbols
-   - Network diagram icons
+  - Cloud service icons
+  - Kubernetes / infrastructure icons
+  - UI / Material icons
+  - Flowchart / diagram symbols
+  - Network diagram icons
 - Availability and naming can change; verify exact library names on the site before use.
 
 ### Fallback: No Icons Available
