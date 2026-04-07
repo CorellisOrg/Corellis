@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "description": "Skill registry for company-wide shared skills. Manages skill tiers, descriptions, and paths.",
+  "tiers": {
+    "base": "Available to all lobsters. No special permissions required.",
+    "controller": "Controller-only skills. Not distributed to lobsters.",
+    "restricted": "Requires explicit allowlist. Only approved lobsters can access."
+  },
+  "skills": {
+    "approval-flow": {
+      "tier": "base",
+      "description": "Structured approval workflows with confidence-based routing to owner.",
+      "path": "approval-flow/SKILL.md"
+    },
+    "browser-cdp": {
+      "tier": "base",
+      "description": "Chrome DevTools Protocol automation for headless browser tasks.",
+      "path": "browser-cdp/SKILL.md"
+    },
+    "ccp": {
+      "tier": "base",
+      "description": "Cross-cutting concerns and shared utilities for multi-skill coordination.",
+      "path": "ccp/SKILL.md"
+    },
+    "coding-workflow": {
+      "tier": "base",
+      "description": "ACP coding agent collaboration with confidence-based routing and output verification.",
+      "path": "coding-workflow/SKILL.md"
+    },
+    "deep-research": {
+      "tier": "base",
+      "description": "Multi-source deep research with web search, synthesis, and cited reports.",
+      "path": "deep-research/SKILL.md"
+    },
+    "excalidraw-diagram-generator": {
+      "tier": "base",
+      "description": "Generate Excalidraw diagrams from natural language descriptions.",
+      "path": "excalidraw-diagram-generator/SKILL.md"
+    },
+    "goal-participant": {
+      "tier": "base",
+      "description": "Goal collaboration participant protocol for receiving, executing, and reporting tasks.",
+      "path": "goal-participant/SKILL.md"
+    },
+    "google-workspace": {
+      "tier": "base",
+      "description": "Google Docs, Sheets, Drive, and Calendar integration.",
+      "path": "google-workspace/SKILL.md"
+    },
+    "proactive-task-engine": {
+      "tier": "base",
+      "description": "Periodic task board scanning to find and propose actionable work items.",
+      "path": "proactive-task-engine/SKILL.md"
+    },
+    "quick-data-dashboard": {
+      "tier": "base",
+      "description": "Rapid data visualization and dashboard generation from structured data.",
+      "path": "quick-data-dashboard/SKILL.md"
+    },
+    "skill-contribution": {
+      "tier": "base",
+      "description": "Submit personal skills to the shared company skill library.",
+      "path": "skill-contribution/SKILL.md"
+    },
+    "structured-decision-alignment": {
+      "tier": "base",
+      "description": "Structured decision-making framework with stakeholder alignment.",
+      "path": "structured-decision-alignment/SKILL.md"
+    },
+    "task-autopilot": {
+      "tier": "base",
+      "description": "Automatic task decomposition, classification, and execution planning.",
+      "path": "task-autopilot/SKILL.md"
+    },
+    "task-management": {
+      "tier": "base",
+      "description": "Task board CRUD operations with pluggable backends (Notion, GitHub, Linear).",
+      "path": "task-management/SKILL.md"
+    },
+    "goal-ops": {
+      "tier": "controller",
+      "description": "Distributed goal orchestration: decompose, distribute, monitor, and complete multi-lobster goals.",
+      "path": "../templates/controller/goal-ops/SKILL.md"
+    },
+    "finance-dashboard": {
+      "tier": "restricted",
+      "description": "Company financial data queries and reporting. Allowlist required.",
+      "path": "finance-dashboard/SKILL.md",
+      "allowlist": []
+    }
+  }
+}

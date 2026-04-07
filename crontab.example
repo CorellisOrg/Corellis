@@ -1,0 +1,59 @@
+# =============================================================================
+# Corellis Controller — Recommended Crontab
+# =============================================================================
+#
+# Install:
+#   crontab crontab.example
+#
+# Or merge into existing crontab:
+#   crontab -l | cat - crontab.example | crontab -
+#
+# All jobs log to /tmp/corellis-cron-*.log for debugging.
+# Adjust paths if your workspace is not at ~/workspace.
+#
+# =============================================================================
+
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# ---------------------------------------------------------------------------
+# Gateway watchdog — restart if crashed (every 5 min)
+# ---------------------------------------------------------------------------
+*/5 * * * * pgrep -f "openclaw gateway" > /dev/null || openclaw gateway start >> /tmp/corellis-cron-watchdog.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Bottleneck inbox poll — check for new escalations (every 5 min)
+# ---------------------------------------------------------------------------
+*/5 * * * * cd ~/workspace && bash scripts/poll-bottleneck-inbox.sh >> /tmp/corellis-cron-bottleneck.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Goal patrol — check active goals for stuck lobsters (every 30 min)
+# Only runs if goals.json has active goals; $0 cost when idle.
+# ---------------------------------------------------------------------------
+*/30 * * * * cd ~/workspace && bash scripts/patrol.sh >> /tmp/corellis-cron-patrol.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Skill submissions — scan for new skill submissions (every 30 min)
+# ---------------------------------------------------------------------------
+*/30 * * * * cd ~/workspace && bash scripts/poll-skill-submissions.sh >> /tmp/corellis-cron-skill-poll.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Proactive task trigger — nudge lobsters to scan their task boards (daily 09:00 UTC)
+# ---------------------------------------------------------------------------
+0 9 * * * cd ~/workspace && bash scripts/proactive-cron.sh >> /tmp/corellis-cron-proactive.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Backup — snapshot critical state files (daily 04:00 UTC)
+# ---------------------------------------------------------------------------
+0 4 * * * tar czf /tmp/corellis-backup-$(date +\%Y\%m\%d).tar.gz ~/workspace/state/ ~/workspace/company-config/ >> /tmp/corellis-cron-backup.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Cron audit — weekly self-check of cron job health (Monday 08:00 UTC)
+# Scans logs for errors and generates a summary report.
+# ---------------------------------------------------------------------------
+0 8 * * 1 cd ~/workspace && bash scripts/cron-audit.sh >> /tmp/corellis-cron-audit.log 2>&1
+
+# ---------------------------------------------------------------------------
+# Log rotation — clean up old cron logs (weekly, Sunday 03:00 UTC)
+# ---------------------------------------------------------------------------
+0 3 * * 0 find /tmp -name "corellis-cron-*.log" -mtime +7 -delete 2>/dev/null

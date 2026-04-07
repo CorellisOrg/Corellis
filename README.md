@@ -80,8 +80,14 @@ Unified task board with sprint planning, breakdown, and tracking. Backend-agnost
 ### 🐣 30-Second Spawning
 Tell your controller *"spawn a lobster for alice"* — it creates the Slack app, handles OAuth, and launches the container. You click Allow and paste one token.
 
-### 📦 17 Built-in Skills
+### 📦 17+ Built-in Skills
 Deep research, SEO monitoring, landing page optimization, weekly reports, structured decision alignment, approval workflows, Excalidraw diagrams, data dashboards, and more. See [`templates/skills/`](templates/skills/).
+
+### 🤖 Coding Agent Workflow
+Confidence-based routing for ACP coding agents (Claude Code, Codex, Cursor). High confidence → auto-execute. Medium → structured prompt + review. Low → ask human first. Every change goes through automated tests + manual review before shipping.
+
+### 🔍 Proactive Task Discovery
+Lobsters don't just wait for assignments — a daily cron triggers them to scan task boards for unassigned work, score items by capability match, and propose actionable items to their owner. Self-driving by default.
 
 ### 🔄 Fleet Operations
 Rolling upgrades with canary + auto-rollback. Config broadcasting. Health checks. Credential management. Gateway watchdogs. 24 operational scripts — all battle-tested.
@@ -115,7 +121,7 @@ This isn't a weekend project. Corellis has been running continuously since Febru
 | Teamind indexed | 50,000+ Slack messages across 30+ channels |
 | Self-improving cycles | 500+ corrections detected and persisted |
 | Goals executed | 200+ goals decomposed and coordinated |
-| Skills deployed | 17 fleet-wide + custom per-lobster skills |
+| Skills deployed | 17+ fleet-wide + custom per-lobster skills |
 
 The 24 operational scripts and Teamind modules were built iteratively from real production needs — not designed in a vacuum.
 

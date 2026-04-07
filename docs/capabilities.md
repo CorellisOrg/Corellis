@@ -15,6 +15,9 @@
 - [Bottleneck Detection & Team Intelligence](#bottleneck-detection--team-intelligence)
 - [Shared Knowledge (Peer Learning)](#shared-knowledge-peer-learning)
 - [Security Model](#security-model)
+- [Goal Orchestration (GoalOps)](#goal-orchestration-goalops)
+- [Proactive Task Discovery](#proactive-task-discovery)
+- [Coding Agent Workflow](#coding-agent-workflow)
 - [Monitoring & Observability](#monitoring--observability)
 - [Upgrade & Rollout](#upgrade--rollout)
 - [All Scripts Reference](#all-scripts-reference)
@@ -380,6 +383,93 @@ OpenClaw's **SecretRef** system (`{"$ref": "secrets://KEY"}`) keeps secrets out 
 ```
 
 Verifies all lobster credentials are valid and API keys haven't expired.
+
+---
+
+## Goal Orchestration (GoalOps)
+
+Coordinate multi-lobster goals with automatic decomposition, distribution, and monitoring.
+
+### How It Works
+
+```
+Owner: "goal: Launch new feature by Friday"
+    │
+    ▼
+Controller decomposes → SG-1 (backend), SG-2 (frontend), SG-3 (QA)
+    │
+    ▼
+Distribute to lobsters via Slack threads + task board entries
+    │
+    ▼
+Lobsters execute autonomously, collaborate P2P
+    │
+    ▼
+Patrol script detects stuck tasks → nudge → escalate
+    │
+    ▼
+Controller verifies acceptance criteria → completion report
+```
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| 4-phase flow | Decompose → Distribute → Monitor → Complete |
+| Event-driven | Lobsters report progress; controller reacts |
+| Patrol fallback | Bash script runs every 30 min, $0 cost when idle |
+| P2P collaboration | Lobsters @mention each other directly |
+| Task board sync | Auto-creates entries in Notion/Linear/GitHub Issues |
+| Coverage check | Verifies sub-goals fully cover the big goal |
+
+See `templates/controller/goal-ops/SKILL.md` for full protocol.
+
+---
+
+## Proactive Task Discovery
+
+Lobsters don't just wait for assignments — they actively scan for work.
+
+### How It Works
+
+1. Daily cron (`proactive-cron.sh`) nudges all lobsters
+2. Each lobster scans configured task boards for unassigned/open items
+3. Items are scored by capability match, priority, effort, and dependencies
+4. High-scoring items are proposed to the owner for approval
+5. On approval, lobster assigns itself and executes
+
+### Confidence Scoring
+
+| Score | Action |
+|-------|--------|
+| 8-10 | Recommend with high confidence |
+| 5-7 | Present with caveats |
+| 0-4 | Skip unless nothing else available |
+
+See `templates/skills/proactive-task-engine/SKILL.md` and `templates/skills/task-autopilot/SKILL.md`.
+
+---
+
+## Coding Agent Workflow
+
+Structured collaboration with ACP coding agents (Claude Code, Codex, Cursor).
+
+### Confidence-Based Routing
+
+| Confidence | Action |
+|------------|--------|
+| High (8-10) | Auto-execute with verification |
+| Medium (5-7) | Structured prompt, careful review |
+| Low (1-4) | Ask human before proceeding |
+
+### Verification Pipeline
+
+Every code change goes through:
+1. Automated: tests pass, lint clean, build succeeds
+2. Manual: changes match requirements, no hardcoded values, consistent style
+3. Decision: ship, iterate, or abandon
+
+See `templates/skills/coding-workflow/SKILL.md`.
 
 ---
 

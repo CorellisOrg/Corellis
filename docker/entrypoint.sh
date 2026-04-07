@@ -137,5 +137,19 @@ fi
 # Clean up stale session lock files from previous crash
 find /home/lobster/.openclaw/agents -name "*.lock" -delete 2>/dev/null || true
 
+# === Controller: Docker socket permissions ===
+# If LOBSTER_ROLE=controller and docker.sock is mounted, grant lobster access
+if [ "$LOBSTER_ROLE" = "controller" ] && [ -S /var/run/docker.sock ]; then
+    DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
+    if [ "$DOCKER_GID" != "0" ]; then
+        # Create a group with the host's docker GID and add lobster to it
+        groupadd -g "$DOCKER_GID" hostdocker 2>/dev/null || true
+        usermod -aG hostdocker lobster 2>/dev/null || true
+    else
+        # Socket owned by root — allow lobster via sudo
+        echo "lobster ALL=(root) NOPASSWD: /usr/bin/docker" >> /etc/sudoers.d/lobster-docker 2>/dev/null || true
+    fi
+fi
+
 # Switch to lobster and run the main command (OpenClaw)
 exec gosu lobster env HOME=/home/lobster "$@"

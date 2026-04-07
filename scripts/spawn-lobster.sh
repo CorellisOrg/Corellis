@@ -79,7 +79,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
         ]
       }
     }
-  }
+  },
   "agents": {
     "defaults": {
       "model": {
@@ -93,7 +93,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
         "maxConcurrent": 4
       }
     }
-  }
+  },
   "session": {
     "dmScope": "per-peer",
     "identityLinks": {
@@ -101,7 +101,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
         "slack:${SLACK_USER_ID}"
       ]
     }
-  }
+  },
   "channels": {
     "slack": {
       "mode": "socket",
@@ -122,7 +122,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
       "nativeStreaming": true,
       "streaming": "partial"
     }
-  }
+  },
   "gateway": {
     "port": 18789,
     "mode": "local",
@@ -134,7 +134,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
     "controlUi": {
       "dangerouslyAllowHostHeaderOriginFallback": true
     }
-  }
+  },
   "talk": {
     "provider": "elevenlabs",
     "providers": {
@@ -142,10 +142,10 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
         "apiKey": "${ELEVENLABS_API_KEY:-}"
       }
     }
-  }
+  },
   "acp": {
     "\$include": "./acp.json"
-  }
+  },
   "tools": {
     "profile": "full",
     "sessions": {
@@ -154,7 +154,7 @@ cat > "$CONFIG_DIR/openclaw.json" << JSONEOF
     "agentToAgent": {
       "enabled": true
     }
-  }
+  },
   "plugins": {
     "entries": {
       "acpx": {
@@ -170,6 +170,10 @@ JSONEOF
 
 # Copy ACP config from template
 cp "$FARM_DIR/templates/acp.json" "$CONFIG_DIR/acp.json"
+
+# Create empty secrets.json (lobsters store personal secrets here)
+echo '{}' > "$CONFIG_DIR/secrets.json"
+chmod 644 "$CONFIG_DIR/secrets.json"
 
 # Generate workspace files — use full template
 # Generate AGENTS.md inline
@@ -230,7 +234,8 @@ cat > "$CONFIG_DIR/workspace/config/mcporter.json" << 'MCPEOF'
       "env": {}
     }
   }
-  MCPEOF
+}
+MCPEOF
 
 # Append service to docker-compose.yml (before the final volumes: section if it exists)
 # We need to insert into the services: block properly

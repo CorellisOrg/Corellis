@@ -305,10 +305,39 @@ company-skills/
 ├── deploy/
 │   └── SKILL.md      # "Deploy to staging" → run your deploy script
 └── onboarding/
-    └── SKILL.md      # "New hire checklist" → step-by-step guide
+│   └── SKILL.md      # "New hire checklist" → step-by-step guide
 ```
 
 Run `./scripts/sync-company-skills.sh` after adding new skills.
+
+The built-in skill templates in `templates/skills/` include goal-participant, proactive-task-engine, task-autopilot, coding-workflow, and more. Copy any you want to `company-skills/` and register in `manifest.json`.
+
+### Try GoalOps
+
+Give your controller a multi-person goal:
+
+```
+You: "goal: Build a customer feedback dashboard by Friday"
+```
+
+The controller will:
+1. Decompose into sub-goals (backend API, frontend UI, data pipeline)
+2. Assign to alice, bob, carol based on their capabilities
+3. Create task board entries and Slack threads
+4. Monitor progress and nudge stuck lobsters
+
+See `templates/controller/goal-ops/SKILL.md` for the full protocol.
+
+### Enable proactive task discovery
+
+Add the daily cron so lobsters proactively find work:
+
+```bash
+# Add to crontab (or see crontab.example for all recommended jobs)
+0 9 * * * cd $(pwd) && bash scripts/proactive-cron.sh
+```
+
+Lobsters will scan their task boards each morning and propose items they can pick up.
 
 ### Scale up
 
